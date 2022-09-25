@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="cache-control" content="max-age=0">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="description" content="期望增進溝通力，但不管怎麼學習都無法提升？工作太忙找不到時間學習？其實是你沒有使用適合你的「學習方式」。快來看看自己是哪一種學習風格，讓學習可以更輕鬆有趣、事半功倍！">  
+	<meta property="og:title" content="我是變色龍型學習者，你也來測試自己專屬學習風格！"> 
+	<meta property="og:type" content="product"> 
+	<meta property="og:url" content="https://site.cwlearning.com.tw/events/learningtest/index.html"> 
+	<meta property="og:description" content="變色龍具有360度視力，它們能夠同時觀看兩個不同物體，分別旋轉和聚焦眼球。你和變色龍一樣，擅長透過視覺觀察，透過圖表、圖片、影像學習，比較能幫助你吸收。"> 
+	<meta property="og:image" content="images/dragonPic.jpg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="627">
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<title>學習風格測驗|主管成長系列學程：30天鍛鍊關鍵溝通力|天下學習</title>
+<!-- write your code here -->
+<style>
+	body{
+		background-image: url(images/bgPic.jpg);
+		background-position:right bottom;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-color:#DBDCDC;
+	}
+  #animation_container, #_preload_div_ {
+	position:absolute;
+	margin:auto;
+	left:0;right:0;
+	top:0;bottom:0;
+  }
+  #copyAdress {
+	position: absolute;
+	left:-1000px;
+	top:-1000px;
+}
+</style>
+<script src="js/createjs.min.js"></script>
+<script src="js/index.js"></script>
+<script>
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function init() {
+	canvas = document.getElementById("canvas");
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("CD5E937ECF054CE2AC4943AB414E5726");
+	var lib=comp.getLibrary();
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
+	loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+	var lib=comp.getLibrary();
+	loader.loadManifest(lib.properties.manifest);
+}
+function handleFileLoad(evt, comp) {
+	var images=comp.getImages();	
+	if (evt && (evt.item.type == "../image")) { images[evt.item.id] = evt.result; }	
+}
+function handleComplete(evt,comp) {
+	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+	var lib=comp.getLibrary();
+	var ss=comp.getSpriteSheet();
+	var queue = evt.target;
+	var ssMetadata = lib.ssMetadata;
+	for(i=0; i<ssMetadata.length; i++) {
+		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+	}
+	var preloaderDiv = document.getElementById("_preload_div_");
+	preloaderDiv.style.display = 'none';
+	canvas.style.display = 'block';
+	exportRoot = new lib.主管成長系列學習風格測驗1();
+	stage = new lib.Stage(canvas);
+	stage.enableMouseOver();	
+	//Registers the "tick" event listener.
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.framerate = lib.properties.fps;
+		createjs.Ticker.addEventListener("tick", stage);
+	}	    
+	//Code to support hidpi screens and responsive scaling.
+	AdobeAn.makeResponsive(true,'both',false,1,[canvas,preloaderDiv,anim_container,dom_overlay_container]);	
+	AdobeAn.compositionLoaded(lib.properties.id);
+	fnStartAnimation();
+}
+</script>
+<!-- write your code here -->
+</head>
+<body onload="init();" style="margin:0px;">
+	<div id="animation_container" style="background-color:rgba(255, 255, 255, 0.00); width:1024px; height:768px">
+		<canvas id="canvas" width="1024" height="768" style="position: absolute; display: none; background-color:rgba(255, 255, 255, 0.00);"></canvas>
+		<div id='_preload_div_' style='position:absolute; top:0; left:0; display: inline-block; height:768px; width: 1024px; text-align: center;'>	<span style='display: inline-block; height: 100%; vertical-align: middle;'></span>	<img src=images/_preloader.gif style='vertical-align: middle; max-height: 100%'/></div>
+
+		<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:1024px; height:768px; position: absolute; left: 0px; top: 0px; display: none;">
+		</div>
+	</div>
+	<div id="copyAdress"></div>
+</body>
+</html>
